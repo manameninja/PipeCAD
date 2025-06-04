@@ -356,6 +356,7 @@ extension TeeViewController {
                     cell.addSubview(imageView)
                 }
             }
+            buttonDropDown.selectionBackgroundColor = .clear
         }
         
         buttonDropDown.anchorView = button

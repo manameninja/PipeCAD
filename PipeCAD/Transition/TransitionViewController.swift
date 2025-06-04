@@ -336,9 +336,9 @@ extension TransitionViewController {
                     cell.addSubview(imageView)
                 }
             }
+            buttonDropDown.selectionBackgroundColor = .clear
         }
         
-        buttonDropDown.selectionBackgroundColor = .clear
         buttonDropDown.anchorView = button
         buttonDropDown.dataSource = data
         buttonDropDown.bottomOffset = CGPoint(x: 0, y: button.bounds.height)
