@@ -363,7 +363,7 @@ extension TeeViewController {
         buttonDropDown.bottomOffset = CGPoint(x: 0, y: button.bounds.height)
         buttonDropDown.animationEntranceOptions = []
         buttonDropDown.animationExitOptions = []
-        buttonDropDown.offsetFromWindowBottom = 80
+        buttonDropDown.offsetFromWindowBottom = 15
         buttonDropDown.direction = .bottom
         buttonDropDown.width = button.frame.width
         

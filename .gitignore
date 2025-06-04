@@ -62,3 +62,5 @@ fastlane/screenshots/**/*.png
 fastlane/test_output
 PipeCAD/Fonts/.DS_Store
 PipeCAD/DropDown/.DS_Store
+PipeCAD/SupportingFiles/.DS_Store
+PipeCAD/.DS_Store
