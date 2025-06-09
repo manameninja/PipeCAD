@@ -452,9 +452,6 @@ extension TransitionViewController {
     func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.title = screenTitle ?? "PipeInfo"
-        navigationItem.backAction = UIAction { _ in
-            self.navigationController?.popViewController(animated: false)
-        }
         let config = UIImage.SymbolConfiguration(weight: .semibold)
         let image = UIImage(systemName: "square.and.arrow.down", withConfiguration: config)
         navigationItem.rightBarButtonItem = UIBarButtonItem(
