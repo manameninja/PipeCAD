@@ -9,7 +9,7 @@ import Foundation
 
 struct TransitionModel {
     
-    static let versionArray = ["Исполнение 1", "Исполнение 2"]
+    static let versionArray = ["(Международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
     static let titlesArray = ["Переход концентрический", "Переход эксцентрический"]
     static let dopsArray = ["(международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
     static let titlesImage = ["conc", "ecen"]

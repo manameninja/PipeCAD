@@ -9,7 +9,7 @@ import Foundation
 
 struct TeeModel {
     
-    static let versionArray = ["Исполнение 1", "Исполнение 2"]
+    static let versionArray = ["(Международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
     static let titlesArray = ["Равнопроходный", "Переходный"]
     static let dopsArray = ["(международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
     static let titlesImage = ["eq", "noeq"]

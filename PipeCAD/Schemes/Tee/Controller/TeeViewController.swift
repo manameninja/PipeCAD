@@ -105,7 +105,7 @@ class TeeViewController: UIViewController {
     
     func updateDropDowns() {
         switch versionButton.titleLabel?.text ?? "" {
-        case "Исполнение 1":
+        case "(Международные типоразмеры ISO 3419)":
             let sortedUniqueDNArray = Array(
                 Set(TeeModel.dnArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
             )
@@ -348,7 +348,7 @@ extension TeeViewController {
                     let imageView = UIImageView(image: image)
                     imageView.tintColor = .systemGray
                     imageView.frame = CGRect(x: 10, y: 10, width: cell.frame.height - 20, height: cell.frame.height - 20)
-                    if self.versionButton.titleLabel?.text == "Исполнение 1" {
+                    if self.versionButton.titleLabel?.text == "(Международные типоразмеры ISO 3419)" {
                         cell.dopLabel.text = TeeModel.dopsArray[0]
                     } else {
                         cell.dopLabel.text = TeeModel.dopsArray[1]
@@ -501,9 +501,9 @@ extension TeeViewController {
         if let config = configurationDict[key] {
             imageView.image = UIImage(named: config.imageName)
             if config.title == "Равнопроходный" {
-                schemeNameLabel.text = "Переход Р-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
+                schemeNameLabel.text = "Переход Р - \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
             } else {
-                schemeNameLabel.text = "Переход П-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
+                schemeNameLabel.text = "Переход П - \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
             }
             massLabel.text = "Масса \(config.mass) кг. "
             setupCoordinates(label: label1, x: config.label1X, y: config.label1Y, text: config.label1Text + " ")

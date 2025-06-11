@@ -99,7 +99,7 @@ class TransitionViewController: UIViewController {
     
     func updateDropDowns() {
         switch versionButton.titleLabel?.text ?? "" {
-        case "Исполнение 1":
+        case "(Международные типоразмеры ISO 3419)":
             let sortedUniqueDNArray = Array(
                 Set(TransitionModel.dnArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
             )
@@ -328,7 +328,7 @@ extension TransitionViewController {
                     let imageView = UIImageView(image: image)
                     imageView.tintColor = .systemGray
                     imageView.frame = CGRect(x: 10, y: 10, width: cell.frame.height - 20, height: cell.frame.height - 20)
-                    if self.versionButton.titleLabel?.text == "Исполнение 1" {
+                    if self.versionButton.titleLabel?.text == "(Международные типоразмеры ISO 3419)" {
                         cell.dopLabel.text = TransitionModel.dopsArray[0]
                     } else {
                         cell.dopLabel.text = TransitionModel.dopsArray[1]
@@ -481,10 +481,16 @@ extension TransitionViewController {
         if let config = configurationDict[key] {
             imageView.image = UIImage(named: config.imageName)
             if config.title == "Переход концентрический" {
-                schemeNameLabel.text = "Переход К-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
+                schemeNameLabel.text = "Переход К - \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
             } else {
-                schemeNameLabel.text = "Переход Э-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
+                schemeNameLabel.text = "Переход Э - \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
             }
+            
+//            if config.title == "Переход концентрический" {
+//                schemeNameLabel.text = "Переход К-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
+//            } else {
+//                schemeNameLabel.text = "Переход Э-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
+//            }
             massLabel.text = "Масса \(config.mass) кг. "
             setupCoordinates(label: label1, x: config.label1X, y: config.label1Y, text: config.label1Text + " ")
             setupCoordinates(label: label2, x: config.label2X, y: config.label2Y, text: config.label2Text + " ")
