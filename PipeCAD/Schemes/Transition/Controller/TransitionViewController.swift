@@ -111,55 +111,25 @@ class TransitionViewController: UIViewController {
                     return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
                 }
             }
-
-            let sortedUniqueDArray = Array(
-                Set(TransitionModel.dArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueTArray = Array(
-                Set(TransitionModel.tArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueD1Array = Array(
-                Set(TransitionModel.d1Array.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
+            
             setupDropDownButton(buttonDropDown: dropDownSize, button: sizeButton, data: sortedUniqueDNArray) { selected in
-                print(selected, "SSS")
                 self.selectedSize = selected
+
+                guard let version = self.versionButton.titleLabel?.text else { return }
+
+                let filtered = self.filterValues(forDN: selected, version: version)
+
+                self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
+                    self.selectedClass = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
+                    self.selectedType = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
+                    self.selectedParameter = $0
+                }
             }
-            setupDropDownButton(buttonDropDown: dropDownClass, button: classButton, data: sortedUniqueDArray) { selected in
-                self.selectedClass = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownType, button: typeButton, data: sortedUniqueTArray) { selected in
-                self.selectedType = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownParameter, button: parameterButton, data: sortedUniqueD1Array) { selected in
-                self.selectedParameter = selected
-            }
+
         default:
             let sortedUniqueDNArray = Array(
                 Set(TransitionModel.dnArray2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
@@ -173,52 +143,22 @@ class TransitionViewController: UIViewController {
                 }
             }
 
-            let sortedUniqueDArray = Array(
-                Set(TransitionModel.dArray2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueTArray = Array(
-                Set(TransitionModel.tArray2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueD1Array = Array(
-                Set(TransitionModel.d1Array2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
             setupDropDownButton(buttonDropDown: dropDownSize, button: sizeButton, data: sortedUniqueDNArray) { selected in
                 self.selectedSize = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownClass, button: classButton, data: sortedUniqueDArray) { selected in
-                self.selectedClass = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownType, button: typeButton, data: sortedUniqueTArray) { selected in
-                self.selectedType = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownParameter, button: parameterButton, data: sortedUniqueD1Array) { selected in
-                self.selectedParameter = selected
+
+                guard let version = self.versionButton.titleLabel?.text else { return }
+
+                let filtered = self.filterValues(forDN: selected, version: version)
+
+                self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
+                    self.selectedClass = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
+                    self.selectedType = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
+                    self.selectedParameter = $0
+                }
             }
         }
 
@@ -513,5 +453,17 @@ extension TransitionViewController {
             label7.text = ""
         }
     }
+    
+    func filterValues(forDN dn: String, version: String) -> (dValues: [String], tValues: [String], d1Values: [String]) {
+        let filtered = configurations.filter {
+            $0.version == version && $0.dn == dn
+        }
 
+        let dValues = Array(Set(filtered.map { $0.d })).sorted(by: { $0.toDouble < $1.toDouble })
+        let tValues = Array(Set(filtered.map { $0.t })).sorted(by: { $0.toDouble < $1.toDouble })
+        let d1Values = Array(Set(filtered.map { $0.d1 })).sorted(by: { $0.toDouble < $1.toDouble })
+
+        return (dValues, tValues, d1Values)
+    }
+    
 }

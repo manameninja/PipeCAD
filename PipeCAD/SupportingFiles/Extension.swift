@@ -75,3 +75,9 @@ extension UIViewController {
         viewController.present(alert, animated: true)
     }
 }
+
+extension String {
+    var toDouble: Double {
+        Double(self.replacingOccurrences(of: ",", with: ".")) ?? 0.0
+    }
+}
