@@ -461,7 +461,9 @@ extension TransitionViewController {
             label7.text = ""
         }
     }
-    
+}
+
+extension TransitionViewController {
     func filterValues(forDN dn: String, version: String) -> (dValues: [String], tValues: [String], d1Values: [String]) {
         let filtered = configurations.filter {
             $0.version == version && $0.dn == dn
@@ -473,9 +475,7 @@ extension TransitionViewController {
 
         return (dValues, tValues, d1Values)
     }
-}
-
-extension TransitionViewController {
+    
     private func firstUpdateDropDown() {
         switch versionButton.titleLabel?.text ?? "" {
         case "(Международные типоразмеры ISO 3419)":

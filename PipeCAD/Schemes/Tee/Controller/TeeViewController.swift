@@ -62,7 +62,7 @@ class TeeViewController: UIViewController {
             d: TeeModel.dArray,
             t: TeeModel.tArray,
             d1: TeeModel.d1Array,
-            t1: TeeModel.t1Array2,
+            t1: TeeModel.t1Array,
             f: TeeModel.fArray,
             h: TeeModel.hArray,
             r: TeeModel.rArray,
@@ -97,9 +97,10 @@ class TeeViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        updateDropDowns()
         findConfiguration()
         setupBorder(labels: dropDownLabels, buttons: dropDownButtons)
+        firstUpdateDropDown()
+        updateDropDowns()
     }
     
     
@@ -117,54 +118,23 @@ class TeeViewController: UIViewController {
                     return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
                 }
             }
-
-            let sortedUniqueDArray = Array(
-                Set(TeeModel.dArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueTArray = Array(
-                Set(TeeModel.tArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueD1Array = Array(
-                Set(TeeModel.d1Array.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
+            
             setupDropDownButton(buttonDropDown: dropDownSize, button: sizeButton, data: sortedUniqueDNArray) { selected in
-                print(selected, "SSS")
                 self.selectedSize = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownClass, button: classButton, data: sortedUniqueDArray) { selected in
-                self.selectedClass = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownType, button: typeButton, data: sortedUniqueTArray) { selected in
-                self.selectedType = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownParameter, button: parameterButton, data: sortedUniqueD1Array) { selected in
-                self.selectedParameter = selected
+
+                guard let version = self.versionButton.titleLabel?.text else { return }
+
+                let filtered = self.filterValues(forDN: selected, version: version)
+
+                self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
+                    self.selectedClass = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
+                    self.selectedType = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
+                    self.selectedParameter = $0
+                }
             }
         default:
             let sortedUniqueDNArray = Array(
@@ -179,52 +149,22 @@ class TeeViewController: UIViewController {
                 }
             }
 
-            let sortedUniqueDArray = Array(
-                Set(TeeModel.dArray2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueTArray = Array(
-                Set(TeeModel.tArray2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
-
-            let sortedUniqueD1Array = Array(
-                Set(TeeModel.d1Array2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
-            )
-            .sorted()
-            .map { number -> String in
-                if number == number.rounded() {
-                    return String(format: "%.0f", number)
-                } else {
-                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
-                }
-            }
             setupDropDownButton(buttonDropDown: dropDownSize, button: sizeButton, data: sortedUniqueDNArray) { selected in
                 self.selectedSize = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownClass, button: classButton, data: sortedUniqueDArray) { selected in
-                self.selectedClass = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownType, button: typeButton, data: sortedUniqueTArray) { selected in
-                self.selectedType = selected
-            }
-            setupDropDownButton(buttonDropDown: dropDownParameter, button: parameterButton, data: sortedUniqueD1Array) { selected in
-                self.selectedParameter = selected
+
+                guard let version = self.versionButton.titleLabel?.text else { return }
+
+                let filtered = self.filterValues(forDN: selected, version: version)
+
+                self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
+                    self.selectedClass = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
+                    self.selectedType = $0
+                }
+                self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
+                    self.selectedParameter = $0
+                }
             }
         }
 
@@ -274,10 +214,18 @@ class TeeViewController: UIViewController {
         var configurations: [TeeConfiguration] = []
 
         let count = min(dn.count, d.count, t.count, d1.count, t1.count, f.count, r.count, h.count, mass.count)
+        print(count)
+        print(dn.count, d.count, t.count, d1.count, t1.count, f.count, r.count, h.count, mass.count)
+        
+        let count2 = min(TeeModel.dnArray2.count, TeeModel.dArray2.count, TeeModel.tArray2.count, TeeModel.d1Array2.count, TeeModel.t1Array2.count, TeeModel.fArray2.count, TeeModel.rArray2.count, TeeModel.hArray2.count, TeeModel.massArray2.count)
+//        print(count2)
+//        print(TeeModel.dnArray2.count, TeeModel.dArray2.count, TeeModel.tArray2.count, TeeModel.d1Array2.count, TeeModel.t1Array2.count, TeeModel.fArray2.count, TeeModel.rArray2.count, TeeModel.hArray2.count, TeeModel.massArray2.count)
+        
+        let countArray = [count, count2]
 
         for type in 0..<TeeModel.titlesArray.count {
             for ver in 0..<TeeModel.versionArray.count {
-                for i in 0..<count {
+                for i in 0..<countArray[ver] {
                     print(count)
                     print(t1.count)
                     let config = TeeConfiguration(
@@ -532,3 +480,115 @@ extension TeeViewController {
         }
     }
 }
+
+
+extension TeeViewController {
+    func filterValues(forDN dn: String, version: String) -> (dValues: [String], tValues: [String], d1Values: [String]) {
+        let filtered = configurations.filter {
+            $0.version == version && $0.dn == dn
+        }
+
+        let dValues = Array(Set(filtered.map { $0.d })).sorted(by: { $0.toDouble < $1.toDouble })
+        let tValues = Array(Set(filtered.map { $0.t })).sorted(by: { $0.toDouble < $1.toDouble })
+        let d1Values = Array(Set(filtered.map { $0.d1 })).sorted(by: { $0.toDouble < $1.toDouble })
+
+        return (dValues, tValues, d1Values)
+    }
+    
+    private func firstUpdateDropDown() {
+        switch versionButton.titleLabel?.text ?? "" {
+        case "(Международные типоразмеры ISO 3419)":
+            let sortedUniqueDNArray = Array(
+                Set(TransitionModel.dnArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
+            )
+            .sorted()
+            .map { number -> String in
+                if number == number.rounded() {
+                    return String(format: "%.0f", number)
+                } else {
+                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
+                }
+            }
+            setupDropDownButton(buttonDropDown: dropDownSize, button: sizeButton, data: sortedUniqueDNArray) { selected in
+                    self.selectedSize = selected
+                    
+                    guard let version = self.versionButton.titleLabel?.text else { return }
+                    
+                    let filtered = self.filterValues(forDN: selected, version: version)
+                    
+                    self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
+                        self.selectedClass = $0
+                    }
+                    self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
+                        self.selectedType = $0
+                    }
+                    self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
+                        self.selectedParameter = $0
+                    }
+                }
+
+                if let currentDN = sizeButton.titleLabel?.text,
+                   let version = versionButton.titleLabel?.text {
+                    
+                    let filtered = filterValues(forDN: currentDN, version: version)
+                    
+                    setupDropDownButton(buttonDropDown: dropDownClass, button: classButton, data: filtered.dValues) {
+                        self.selectedClass = $0
+                    }
+                    setupDropDownButton(buttonDropDown: dropDownType, button: typeButton, data: filtered.tValues) {
+                        self.selectedType = $0
+                    }
+                    setupDropDownButton(buttonDropDown: dropDownParameter, button: parameterButton, data: filtered.d1Values) {
+                        self.selectedParameter = $0
+                    }
+                }
+        default:
+            let sortedUniqueDNArray = Array(
+                Set(TransitionModel.dnArray2.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
+            )
+            .sorted()
+            .map { number -> String in
+                if number == number.rounded() {
+                    return String(format: "%.0f", number)
+                } else {
+                    return String(format: "%.1f", number).replacingOccurrences(of: ".", with: ",")
+                }
+            }
+            setupDropDownButton(buttonDropDown: dropDownSize, button: sizeButton, data: sortedUniqueDNArray) { selected in
+                    self.selectedSize = selected
+                    
+                    guard let version = self.versionButton.titleLabel?.text else { return }
+                    
+                    let filtered = self.filterValues(forDN: selected, version: version)
+                    
+                    self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
+                        self.selectedClass = $0
+                    }
+                    self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
+                        self.selectedType = $0
+                    }
+                    self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
+                        self.selectedParameter = $0
+                    }
+                }
+
+                // ⬇️ Автоматическая фильтрация по текущему значению sizeButton (если есть)
+                if let currentDN = sizeButton.titleLabel?.text,
+                   let version = versionButton.titleLabel?.text {
+                    
+                    let filtered = filterValues(forDN: currentDN, version: version)
+                    
+                    setupDropDownButton(buttonDropDown: dropDownClass, button: classButton, data: filtered.dValues) {
+                        self.selectedClass = $0
+                    }
+                    setupDropDownButton(buttonDropDown: dropDownType, button: typeButton, data: filtered.tValues) {
+                        self.selectedType = $0
+                    }
+                    setupDropDownButton(buttonDropDown: dropDownParameter, button: parameterButton, data: filtered.d1Values) {
+                        self.selectedParameter = $0
+                    }
+                }
+        }
+    }
+}
+
