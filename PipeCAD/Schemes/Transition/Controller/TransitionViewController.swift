@@ -205,12 +205,17 @@ class TransitionViewController: UIViewController {
         var configurations: [FlangeConfiguration] = []
 
         let count = min(dn.count, d.count, t.count, d1.count, t1.count, l.count, r.count, r1.count)
-        print(dn.count, d.count, t.count, d1.count, t1.count, l.count, r.count, r1.count)
-        print(TransitionModel.dnArray.count, TransitionModel.dArray.count, TransitionModel.tArray.count, TransitionModel.d1Array.count, TransitionModel.t1Array.count, TransitionModel.lArray.count, TransitionModel.rArray.count, TransitionModel.r1Array.count)
+//        print(dn.count, d.count, t.count, d1.count, t1.count, l.count, r.count, r1.count)
+//        print(TransitionModel.dnArray.count, TransitionModel.dArray.count, TransitionModel.tArray.count, TransitionModel.d1Array.count, TransitionModel.t1Array.count, TransitionModel.lArray.count, TransitionModel.rArray.count, TransitionModel.r1Array.count)
         
+        let count2 = min(TransitionModel.dnArray2.count, TransitionModel.dArray2.count, TransitionModel.tArray2.count, TransitionModel.d1Array2.count, TransitionModel.t1Array2.count, TransitionModel.lArray2.count, TransitionModel.rArray2.count, TransitionModel.r1Array2.count)
+//        print(count2)
+//        print(TransitionModel.dnArray2.count, TransitionModel.dArray2.count, TransitionModel.tArray2.count, TransitionModel.d1Array2.count, TransitionModel.t1Array2.count, TransitionModel.lArray2.count, TransitionModel.rArray2.count, TransitionModel.r1Array2.count)
+        
+        let countArray = [count, count2]
         for type in 0..<TransitionModel.titlesArray.count {
             for ver in 0..<TransitionModel.versionArray.count {
-                for i in 0..<count {
+                for i in 0..<countArray[ver] {
                     let config = FlangeConfiguration(
                         version: version[ver],
                         title: title[type],
