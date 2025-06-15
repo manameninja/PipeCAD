@@ -5,6 +5,8 @@ import Photos
 
 class TransitionViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var massLabel: UILabel!
     @IBOutlet weak var schemeNameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
@@ -52,6 +54,11 @@ class TransitionViewController: UIViewController {
         setupTitles()
         setupNavigationBar()
         findConfiguration()
+        
+        scrollView.delegate = self
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 5.0
+        scrollView.zoomScale = 1.0
         
         let configurations = createFlangeConfigurations(
             version: TransitionModel.versionArray,
@@ -329,7 +336,8 @@ extension TransitionViewController {
         //label.layer.borderWidth = 1
         label.sizeToFit()
         
-        imageView.addSubview(label)
+        //imageView.addSubview(label)
+        imageContainerView.addSubview(label)
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -337,8 +345,8 @@ extension TransitionViewController {
         let relativeOffsetY = y / 402 * screenWidth
         
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor, constant: relativeOffsetX),
-            label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor, constant: relativeOffsetY)
+            label.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor, constant: relativeOffsetX),
+            label.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor, constant: relativeOffsetY)
         ])
     }
     
@@ -570,5 +578,11 @@ extension TransitionViewController {
                     }
                 }
         }
+    }
+}
+
+extension TransitionViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageContainerView
     }
 }

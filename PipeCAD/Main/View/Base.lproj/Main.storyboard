@@ -55,24 +55,51 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbx-iu-GMC">
                                         <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="eOm-aF-ZQa">
-                                                <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
-                                            </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ГОСТ 17378-2001 " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcy-pL-UGB">
                                                 <rect key="frame" x="289" y="245.99999999999997" width="109" height="15.333333333333343"/>
                                                 <fontDescription key="fontDescription" name="GOSTTypeA-Italic" family="GOST type A" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2X-tz-KnY">
+                                                <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9pc-6A-90o" userLabel="ScrollContailerView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tHf-US-v7H">
+                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="trailing" secondItem="tHf-US-v7H" secondAttribute="trailing" id="0Cz-uq-Ql8"/>
+                                                            <constraint firstItem="tHf-US-v7H" firstAttribute="leading" secondItem="9pc-6A-90o" secondAttribute="leading" id="5jC-Tz-qPF"/>
+                                                            <constraint firstItem="tHf-US-v7H" firstAttribute="top" secondItem="9pc-6A-90o" secondAttribute="top" id="Dnw-O6-kCE"/>
+                                                            <constraint firstAttribute="bottom" secondItem="tHf-US-v7H" secondAttribute="bottom" id="i8X-WH-JlF"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="9pc-6A-90o" firstAttribute="top" secondItem="q2X-tz-KnY" secondAttribute="top" id="3eJ-fi-CK7"/>
+                                                    <constraint firstItem="9pc-6A-90o" firstAttribute="leading" secondItem="q2X-tz-KnY" secondAttribute="leading" id="3is-8K-L3z"/>
+                                                    <constraint firstAttribute="trailing" secondItem="9pc-6A-90o" secondAttribute="trailing" id="QU7-Rn-2wJ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="9pc-6A-90o" secondAttribute="bottom" id="WcS-Sk-n28"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="contentLayoutGuide" id="SJI-LK-kUK"/>
+                                                <viewLayoutGuide key="frameLayoutGuide" id="FsX-ch-9XN"/>
+                                            </scrollView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="eOm-aF-ZQa" secondAttribute="bottom" id="7Oq-oS-sEf"/>
-                                            <constraint firstItem="eOm-aF-ZQa" firstAttribute="leading" secondItem="tbx-iu-GMC" secondAttribute="leading" id="9tc-Pv-HKO"/>
-                                            <constraint firstAttribute="trailing" secondItem="eOm-aF-ZQa" secondAttribute="trailing" id="BHR-bK-gKz"/>
                                             <constraint firstAttribute="trailing" secondItem="xcy-pL-UGB" secondAttribute="trailing" constant="4" id="F6n-R5-Rnm"/>
-                                            <constraint firstItem="eOm-aF-ZQa" firstAttribute="top" secondItem="tbx-iu-GMC" secondAttribute="top" id="a33-uq-LoL"/>
+                                            <constraint firstItem="tHf-US-v7H" firstAttribute="width" secondItem="tbx-iu-GMC" secondAttribute="width" id="bF9-C3-bTY"/>
+                                            <constraint firstItem="tHf-US-v7H" firstAttribute="height" secondItem="tbx-iu-GMC" secondAttribute="height" id="bHF-J1-hAD"/>
+                                            <constraint firstAttribute="trailing" secondItem="q2X-tz-KnY" secondAttribute="trailing" id="cyG-lu-ehn"/>
                                             <constraint firstAttribute="bottom" secondItem="xcy-pL-UGB" secondAttribute="bottom" constant="4" id="dn2-pG-tbq"/>
+                                            <constraint firstItem="q2X-tz-KnY" firstAttribute="leading" secondItem="tbx-iu-GMC" secondAttribute="leading" id="edV-8t-Lm1"/>
+                                            <constraint firstAttribute="bottom" secondItem="q2X-tz-KnY" secondAttribute="bottom" id="qXg-ig-h5H"/>
+                                            <constraint firstItem="q2X-tz-KnY" firstAttribute="top" secondItem="tbx-iu-GMC" secondAttribute="top" id="rz3-eT-U75"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="02I-zy-R0h" userLabel="backStackArrows">
@@ -403,10 +430,12 @@
                     <connections>
                         <outlet property="classButton" destination="aoq-gw-gaU" id="yPs-Lj-cJJ"/>
                         <outlet property="containerView" destination="tbx-iu-GMC" id="8X7-gd-2OJ"/>
-                        <outlet property="imageView" destination="eOm-aF-ZQa" id="cN5-7p-Cab"/>
+                        <outlet property="imageContainerView" destination="9pc-6A-90o" id="CSK-eY-zAd"/>
+                        <outlet property="imageView" destination="tHf-US-v7H" id="OSB-UN-Rpd"/>
                         <outlet property="massLabel" destination="wa6-fR-FnA" id="Mpr-Qv-Rnw"/>
                         <outlet property="parameterButton" destination="aIv-sv-CuA" id="fse-b6-hlV"/>
                         <outlet property="schemeNameLabel" destination="wP8-EC-eas" id="7A8-5I-DAq"/>
+                        <outlet property="scrollView" destination="q2X-tz-KnY" id="yKX-Eb-Zwa"/>
                         <outlet property="sizeButton" destination="2md-kB-752" id="btz-aE-TzL"/>
                         <outlet property="stackView4" destination="lin-yL-yf4" id="SjK-2y-4iG"/>
                         <outlet property="titleButton" destination="Gip-ob-GAS" id="e9f-1b-RsJ"/>
