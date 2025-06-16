@@ -806,25 +806,43 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKR-1I-S4k">
                                         <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="eq" translatesAutoresizingMaskIntoConstraints="NO" id="BXK-4k-uQ5">
+                                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4OW-oz-fkN">
                                                 <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ГОСТ 17376-2001 " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68G-om-SJx">
-                                                <rect key="frame" x="289" y="245.99999999999997" width="109" height="15.333333333333343"/>
-                                                <fontDescription key="fontDescription" name="GOSTTypeA-Italic" family="GOST type A" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mCK-72-7Gt" userLabel="ScrollContailerView">
+                                                        <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
+                                                        <subviews>
+                                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AOa-YW-qln">
+                                                                <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="AOa-YW-qln" firstAttribute="top" secondItem="mCK-72-7Gt" secondAttribute="top" id="RMy-a1-Raa"/>
+                                                            <constraint firstItem="AOa-YW-qln" firstAttribute="leading" secondItem="mCK-72-7Gt" secondAttribute="leading" id="hIF-cR-qPY"/>
+                                                            <constraint firstAttribute="bottom" secondItem="AOa-YW-qln" secondAttribute="bottom" id="rgo-98-Gjg"/>
+                                                            <constraint firstAttribute="trailing" secondItem="AOa-YW-qln" secondAttribute="trailing" id="vi0-eu-cfh"/>
+                                                        </constraints>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="mCK-72-7Gt" firstAttribute="top" secondItem="4OW-oz-fkN" secondAttribute="top" id="ChR-ay-SHF"/>
+                                                    <constraint firstAttribute="trailing" secondItem="mCK-72-7Gt" secondAttribute="trailing" id="QLz-69-8Uf"/>
+                                                    <constraint firstItem="mCK-72-7Gt" firstAttribute="leading" secondItem="4OW-oz-fkN" secondAttribute="leading" id="d9F-zv-kor"/>
+                                                    <constraint firstAttribute="bottom" secondItem="mCK-72-7Gt" secondAttribute="bottom" id="kNc-6w-cwL"/>
+                                                </constraints>
+                                                <viewLayoutGuide key="contentLayoutGuide" id="xdq-sq-2Xs"/>
+                                                <viewLayoutGuide key="frameLayoutGuide" id="sbo-O8-zBW"/>
+                                            </scrollView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="68G-om-SJx" secondAttribute="bottom" constant="4" id="Deg-J2-AIh"/>
-                                            <constraint firstItem="BXK-4k-uQ5" firstAttribute="top" secondItem="cKR-1I-S4k" secondAttribute="top" id="KKA-hp-60B"/>
-                                            <constraint firstAttribute="bottom" secondItem="BXK-4k-uQ5" secondAttribute="bottom" id="NRy-nJ-kbP"/>
-                                            <constraint firstItem="68G-om-SJx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cKR-1I-S4k" secondAttribute="leading" constant="20" symbolic="YES" id="WX0-vz-vkC"/>
-                                            <constraint firstItem="BXK-4k-uQ5" firstAttribute="leading" secondItem="cKR-1I-S4k" secondAttribute="leading" id="bIa-ti-lnz"/>
-                                            <constraint firstAttribute="trailing" secondItem="68G-om-SJx" secondAttribute="trailing" constant="4" id="jUb-1B-fA0"/>
-                                            <constraint firstAttribute="trailing" secondItem="BXK-4k-uQ5" secondAttribute="trailing" id="t99-AI-w2r"/>
+                                            <constraint firstAttribute="trailing" secondItem="4OW-oz-fkN" secondAttribute="trailing" id="9PR-tH-zsO"/>
+                                            <constraint firstItem="4OW-oz-fkN" firstAttribute="leading" secondItem="cKR-1I-S4k" secondAttribute="leading" id="JID-As-hFN"/>
+                                            <constraint firstItem="AOa-YW-qln" firstAttribute="height" secondItem="cKR-1I-S4k" secondAttribute="height" id="Lr7-6A-XER"/>
+                                            <constraint firstItem="AOa-YW-qln" firstAttribute="width" secondItem="cKR-1I-S4k" secondAttribute="width" id="NCy-PZ-PTE"/>
+                                            <constraint firstItem="4OW-oz-fkN" firstAttribute="top" secondItem="cKR-1I-S4k" secondAttribute="top" id="Rou-ne-wQa"/>
+                                            <constraint firstAttribute="bottom" secondItem="4OW-oz-fkN" secondAttribute="bottom" id="nbW-5B-oen"/>
                                         </constraints>
                                     </view>
                                     <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s3k-RP-LYk" userLabel="backStackArrows">
@@ -1153,10 +1171,12 @@
                     <connections>
                         <outlet property="classButton" destination="kU3-SR-LTQ" id="mId-vN-CVl"/>
                         <outlet property="containerView" destination="cKR-1I-S4k" id="ehV-TZ-YNM"/>
-                        <outlet property="imageView" destination="BXK-4k-uQ5" id="of9-vr-ago"/>
+                        <outlet property="imageContainerView" destination="mCK-72-7Gt" id="vuJ-Jd-hfz"/>
+                        <outlet property="imageView" destination="AOa-YW-qln" id="yV3-xC-IKL"/>
                         <outlet property="massLabel" destination="JSy-t9-m5H" id="jWJ-Xp-hY1"/>
                         <outlet property="parameterButton" destination="Im7-9a-Ibg" id="76S-ui-gCR"/>
                         <outlet property="schemeNameLabel" destination="iug-Td-U0x" id="IVO-vb-TFG"/>
+                        <outlet property="scrollView" destination="4OW-oz-fkN" id="BVl-gr-zk8"/>
                         <outlet property="sizeButton" destination="mHa-Uk-vG6" id="QtB-Yh-HeJ"/>
                         <outlet property="stackView4" destination="fuI-2V-4uO" id="5Vw-ti-fJy"/>
                         <outlet property="titleButton" destination="v8v-Sj-Oxe" id="0A8-wF-97z"/>
@@ -1176,14 +1196,13 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fbE-KI-zXC" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1772" y="-21"/>
+            <point key="canvasLocation" x="1771.641791044776" y="-21.281464530892446"/>
         </scene>
     </scenes>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
         <image name="circle.grid.2x1.right.filled" catalog="system" width="128" height="62"/>
         <image name="envelope" catalog="system" width="128" height="85"/>
-        <image name="eq" width="1723" height="1426"/>
         <image name="hammer" catalog="system" width="128" height="117"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="person" catalog="system" width="128" height="121"/>

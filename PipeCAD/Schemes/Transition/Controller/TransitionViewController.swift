@@ -128,14 +128,31 @@ class TransitionViewController: UIViewController {
 
                 let filtered = self.filterValues(forDN: selected, version: version)
 
+                // CLASS (D)
                 self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
                     self.selectedClass = $0
                 }
+                if let firstD = filtered.dValues.first {
+                    self.classButton.setTitle(firstD, for: .normal)
+                    self.selectedClass = firstD
+                }
+                
+                // TYPE (T)
                 self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
                     self.selectedType = $0
                 }
+                if let firstT = filtered.tValues.first {
+                    self.typeButton.setTitle(firstT, for: .normal)
+                    self.selectedType = firstT
+                }
+                
+                // PARAMETER (D1)
                 self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
                     self.selectedParameter = $0
+                }
+                if let firstD1 = filtered.d1Values.first {
+                    self.parameterButton.setTitle(firstD1, for: .normal)
+                    self.selectedParameter = firstD1
                 }
             }
 
@@ -159,14 +176,31 @@ class TransitionViewController: UIViewController {
 
                 let filtered = self.filterValues(forDN: selected, version: version)
 
+                // CLASS (D)
                 self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
                     self.selectedClass = $0
                 }
+                if let firstD = filtered.dValues.first {
+                    self.classButton.setTitle(firstD, for: .normal)
+                    self.selectedClass = firstD
+                }
+                
+                // TYPE (T)
                 self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
                     self.selectedType = $0
                 }
+                if let firstT = filtered.tValues.first {
+                    self.typeButton.setTitle(firstT, for: .normal)
+                    self.selectedType = firstT
+                }
+                
+                // PARAMETER (D1)
                 self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
                     self.selectedParameter = $0
+                }
+                if let firstD1 = filtered.d1Values.first {
+                    self.parameterButton.setTitle(firstD1, for: .normal)
+                    self.selectedParameter = firstD1
                 }
             }
         }
@@ -314,6 +348,7 @@ extension TransitionViewController {
             button.setTitle("\(item)", for: .normal)
             selectionHandler(item)
             self.selectedIndex = index
+            self.scrollView.zoomScale = 1.0
             self.findConfiguration()
         }
     }

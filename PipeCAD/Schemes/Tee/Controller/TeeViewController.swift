@@ -5,6 +5,8 @@ import Photos
 
 class TeeViewController: UIViewController {
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var imageContainerView: UIView!
     @IBOutlet weak var massLabel: UILabel!
     @IBOutlet weak var schemeNameLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
@@ -41,6 +43,7 @@ class TeeViewController: UIViewController {
     let label7 = UILabel()
     let label8 = UILabel()
     let label9 = UILabel()
+    let gostLabel = UILabel()
     
     let dropDownVersion = DropDown()
     let dropDownTitle = DropDown()
@@ -54,6 +57,11 @@ class TeeViewController: UIViewController {
         setupTitles()
         setupNavigationBar()
         findConfiguration()
+        
+        scrollView.delegate = self
+        scrollView.minimumZoomScale = 1.0
+        scrollView.maximumZoomScale = 5.0
+        scrollView.zoomScale = 1.0
         
         let configurations = createFlangeConfigurations(
             version: TeeModel.versionArray,
@@ -125,15 +133,32 @@ class TeeViewController: UIViewController {
                 guard let version = self.versionButton.titleLabel?.text else { return }
 
                 let filtered = self.filterValues(forDN: selected, version: version)
-
+                
+                // CLASS (D)
                 self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
                     self.selectedClass = $0
                 }
+                if let firstD = filtered.dValues.first {
+                    self.classButton.setTitle(firstD, for: .normal)
+                    self.selectedClass = firstD
+                }
+                
+                // TYPE (T)
                 self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
                     self.selectedType = $0
                 }
+                if let firstT = filtered.tValues.first {
+                    self.typeButton.setTitle(firstT, for: .normal)
+                    self.selectedType = firstT
+                }
+                
+                // PARAMETER (D1)
                 self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
                     self.selectedParameter = $0
+                }
+                if let firstD1 = filtered.d1Values.first {
+                    self.parameterButton.setTitle(firstD1, for: .normal)
+                    self.selectedParameter = firstD1
                 }
             }
         default:
@@ -156,14 +181,31 @@ class TeeViewController: UIViewController {
 
                 let filtered = self.filterValues(forDN: selected, version: version)
 
+                // CLASS (D)
                 self.setupDropDownButton(buttonDropDown: self.dropDownClass, button: self.classButton, data: filtered.dValues) {
                     self.selectedClass = $0
                 }
+                if let firstD = filtered.dValues.first {
+                    self.classButton.setTitle(firstD, for: .normal)
+                    self.selectedClass = firstD
+                }
+                
+                // TYPE (T)
                 self.setupDropDownButton(buttonDropDown: self.dropDownType, button: self.typeButton, data: filtered.tValues) {
                     self.selectedType = $0
                 }
+                if let firstT = filtered.tValues.first {
+                    self.typeButton.setTitle(firstT, for: .normal)
+                    self.selectedType = firstT
+                }
+                
+                // PARAMETER (D1)
                 self.setupDropDownButton(buttonDropDown: self.dropDownParameter, button: self.parameterButton, data: filtered.d1Values) {
                     self.selectedParameter = $0
+                }
+                if let firstD1 = filtered.d1Values.first {
+                    self.parameterButton.setTitle(firstD1, for: .normal)
+                    self.selectedParameter = firstD1
                 }
             }
         }
@@ -327,6 +369,7 @@ extension TeeViewController {
             selectionHandler(item)
             self.selectedIndex = index
             self.findConfiguration()
+            self.scrollView.zoomScale = 1.0
         }
     }
 
@@ -334,8 +377,12 @@ extension TeeViewController {
         let screenSize = UIScreen.main.bounds.size
         let screenWidth = screenSize.width
         
-        if imageView.subviews.contains(label) {
+        if imageContainerView.subviews.contains(label) {
             label.removeFromSuperview()
+        }
+        
+        if imageContainerView.subviews.contains(gostLabel) {
+            gostLabel.removeFromSuperview()
         }
         
         label.text = text
@@ -349,7 +396,7 @@ extension TeeViewController {
         //label.layer.borderWidth = 1
         label.sizeToFit()
         
-        imageView.addSubview(label)
+        imageContainerView.addSubview(label)
         
         label.translatesAutoresizingMaskIntoConstraints = false
         
@@ -357,8 +404,20 @@ extension TeeViewController {
         let relativeOffsetY = y / 402 * screenWidth
         
         NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: imageView.centerXAnchor, constant: relativeOffsetX),
-            label.centerYAnchor.constraint(equalTo: imageView.centerYAnchor, constant: relativeOffsetY)
+            label.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor, constant: relativeOffsetX),
+            label.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor, constant: relativeOffsetY)
+        ])
+        
+        gostLabel.text = "ГОСТ 17376-2001 "
+        gostLabel.font = .customFont(name: "GOST type A Italic", size: fontSize)
+        gostLabel.sizeToFit()
+        imageContainerView.addSubview(gostLabel)
+        
+        gostLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            gostLabel.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor, constant: -8),
+            gostLabel.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor, constant: -8)
         ])
     }
     
@@ -592,3 +651,8 @@ extension TeeViewController {
     }
 }
 
+extension TeeViewController: UIScrollViewDelegate {
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return imageContainerView
+    }
+}
