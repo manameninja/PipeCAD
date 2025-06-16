@@ -80,6 +80,12 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationItem.backButtonTitle = ""
             vc.screenTitle = items[indexPath.row].title
             self.navigationController?.pushViewController(vc, animated: true)
+        case 2:
+            let sBoard = UIStoryboard(name: "Main", bundle: nil)
+            let vc = sBoard.instantiateViewController(withIdentifier: "WithdrawalVC") as! WithdrawalViewController
+            self.navigationItem.backButtonTitle = ""
+            vc.screenTitle = items[indexPath.row].title
+            self.navigationController?.pushViewController(vc, animated: true)
         case 8:
             let sBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = sBoard.instantiateViewController(withIdentifier: "HelpVC") as! HelpViewController
