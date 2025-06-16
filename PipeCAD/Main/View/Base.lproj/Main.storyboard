@@ -55,12 +55,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tbx-iu-GMC">
                                         <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ГОСТ 17378-2001 " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xcy-pL-UGB">
-                                                <rect key="frame" x="289" y="245.99999999999997" width="109" height="15.333333333333343"/>
-                                                <fontDescription key="fontDescription" name="GOSTTypeA-Italic" family="GOST type A" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2X-tz-KnY">
                                                 <rect key="frame" x="0.0" y="0.0" width="402" height="265.33333333333331"/>
                                                 <subviews>
@@ -92,11 +86,9 @@
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="xcy-pL-UGB" secondAttribute="trailing" constant="4" id="F6n-R5-Rnm"/>
                                             <constraint firstItem="tHf-US-v7H" firstAttribute="width" secondItem="tbx-iu-GMC" secondAttribute="width" id="bF9-C3-bTY"/>
                                             <constraint firstItem="tHf-US-v7H" firstAttribute="height" secondItem="tbx-iu-GMC" secondAttribute="height" id="bHF-J1-hAD"/>
                                             <constraint firstAttribute="trailing" secondItem="q2X-tz-KnY" secondAttribute="trailing" id="cyG-lu-ehn"/>
-                                            <constraint firstAttribute="bottom" secondItem="xcy-pL-UGB" secondAttribute="bottom" constant="4" id="dn2-pG-tbq"/>
                                             <constraint firstItem="q2X-tz-KnY" firstAttribute="leading" secondItem="tbx-iu-GMC" secondAttribute="leading" id="edV-8t-Lm1"/>
                                             <constraint firstAttribute="bottom" secondItem="q2X-tz-KnY" secondAttribute="bottom" id="qXg-ig-h5H"/>
                                             <constraint firstItem="q2X-tz-KnY" firstAttribute="top" secondItem="tbx-iu-GMC" secondAttribute="top" id="rz3-eT-U75"/>

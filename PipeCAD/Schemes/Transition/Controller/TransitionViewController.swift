@@ -41,6 +41,7 @@ class TransitionViewController: UIViewController {
     let label5 = UILabel()
     let label6 = UILabel()
     let label7 = UILabel()
+    let gostLabel = UILabel()
     
     let dropDownVersion = DropDown()
     let dropDownTitle = DropDown()
@@ -321,8 +322,12 @@ extension TransitionViewController {
         let screenSize = UIScreen.main.bounds.size
         let screenWidth = screenSize.width
         
-        if imageView.subviews.contains(label) {
+        if imageContainerView.subviews.contains(label) {
             label.removeFromSuperview()
+        }
+        
+        if imageContainerView.subviews.contains(gostLabel) {
+            gostLabel.removeFromSuperview()
         }
         
         label.text = text
@@ -347,6 +352,18 @@ extension TransitionViewController {
         NSLayoutConstraint.activate([
             label.centerXAnchor.constraint(equalTo: imageContainerView.centerXAnchor, constant: relativeOffsetX),
             label.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor, constant: relativeOffsetY)
+        ])
+        
+        gostLabel.text = "ГОСТ 17378-2001 "
+        gostLabel.font = .customFont(name: "GOST type A Italic", size: fontSize)
+        gostLabel.sizeToFit()
+        imageContainerView.addSubview(gostLabel)
+        
+        gostLabel.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            gostLabel.trailingAnchor.constraint(equalTo: imageContainerView.trailingAnchor, constant: -8),
+            gostLabel.bottomAnchor.constraint(equalTo: imageContainerView.bottomAnchor, constant: -8)
         ])
     }
     
@@ -442,11 +459,6 @@ extension TransitionViewController {
                 schemeNameLabel.text = "Переход Э - \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
             }
             
-//            if config.title == "Переход концентрический" {
-//                schemeNameLabel.text = "Переход К-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
-//            } else {
-//                schemeNameLabel.text = "Переход Э-\(config.version.last ?? "1")- \(config.dn) x \(config.d) x \(config.t) x \(config.d1)"
-//            }
             massLabel.text = "Масса \(config.mass) кг. "
             setupCoordinates(label: label1, x: config.label1X, y: config.label1Y, text: config.label1Text + " ")
             setupCoordinates(label: label2, x: config.label2X, y: config.label2Y, text: config.label2Text + " ")
@@ -459,6 +471,7 @@ extension TransitionViewController {
             imageView.image = nil
             schemeNameLabel.text = "Конфигурация не найдена"
             massLabel.text = "Попробуйте подобрать другие параметры "
+            gostLabel.text = ""
             print("Конфигурация не найдена ", key)
             label1.text = ""
             label2.text = ""
