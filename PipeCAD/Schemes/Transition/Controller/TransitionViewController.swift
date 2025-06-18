@@ -460,19 +460,53 @@ extension TransitionViewController {
     func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.title = screenTitle ?? "PipeInfo"
+        
         let config = UIImage.SymbolConfiguration(weight: .semibold)
-        let image = UIImage(systemName: "square.and.arrow.down", withConfiguration: config)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: image,
+        let secondConfig = UIImage.SymbolConfiguration(weight: .medium)
+        
+        // Первая кнопка — "Скачать"
+        let downloadImage = UIImage(systemName: "arrow.down.square", withConfiguration: config)
+        let downloadButton = UIBarButtonItem(
+            image: downloadImage,
             style: .plain,
             target: self,
             action: #selector(doneButtonTapped)
         )
+        
+        // Вторая кнопка — например, "Поделиться"
+        let shareImage = UIImage(systemName: "view.3d", withConfiguration: secondConfig)
+        let shareButton = UIBarButtonItem(
+            image: shareImage,
+            style: .plain,
+            target: self,
+            action: #selector(sceneButtonTapped)
+        )
+        
+        // Отрицательный spacer уменьшает расстояние между кнопками
+        let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
+        negativeSpacer.width = -32  // можно поэкспериментировать с -6, -10 и т.п.
+
+        navigationItem.rightBarButtonItems = [downloadButton, negativeSpacer, shareButton]
     }
+
+    
     @objc private func doneButtonTapped() {
         let renderImage = containerView.asImage()
         saveImageToPhotosAlbum(renderImage, in: self)
     }
+    
+    @objc private func sceneButtonTapped() {
+        let sBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sBoard.instantiateViewController(withIdentifier: "SceneVC") as! SceneViewController
+        vc.titleString = "3D - \(selectedTitle ?? "")"
+        if titleButton.titleLabel?.text == "Переход концентрический" {
+            vc.modelName = "ball.usdz"
+        } else {
+            vc.modelName = "tv_retro.usdz"
+        }
+        self.present(vc, animated: true)
+    }
+    
     
     func findConfiguration() {
         guard

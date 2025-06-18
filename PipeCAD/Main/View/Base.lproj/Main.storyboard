@@ -1522,6 +1522,62 @@
             </objects>
             <point key="canvasLocation" x="1046" y="629"/>
         </scene>
+        <!--Scene View Controller-->
+        <scene sceneID="cjK-bk-V3x">
+            <objects>
+                <viewController storyboardIdentifier="SceneVC" id="X7y-zA-Vp3" customClass="SceneViewController" customModule="PipeCAD" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="0FU-on-f6Z">
+                        <rect key="frame" x="0.0" y="0.0" width="402" height="874"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="luW-Pi-K22">
+                                <rect key="frame" x="0.0" y="188" width="402" height="618"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lFd-KZ-fyz">
+                                <rect key="frame" x="354" y="140" width="32" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="32" id="Ihs-C9-fP3"/>
+                                    <constraint firstAttribute="height" constant="32" id="cwp-2U-8mb"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" image="xmark" catalog="system"/>
+                                <connections>
+                                    <action selector="closeButtonAction:" destination="X7y-zA-Vp3" eventType="touchUpInside" id="FTR-Bw-Wdi"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3D" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DUG-6C-lK1">
+                                <rect key="frame" x="64" y="145.66666666666666" width="274" height="21"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="qVL-tU-bFB"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="luW-Pi-K22" firstAttribute="top" secondItem="qVL-tU-bFB" secondAttribute="top" constant="64" id="0Oq-ds-hZl"/>
+                            <constraint firstItem="qVL-tU-bFB" firstAttribute="bottom" secondItem="luW-Pi-K22" secondAttribute="bottom" id="8UN-VR-aCG"/>
+                            <constraint firstItem="luW-Pi-K22" firstAttribute="leading" secondItem="qVL-tU-bFB" secondAttribute="leading" id="Bib-Xr-e8j"/>
+                            <constraint firstItem="qVL-tU-bFB" firstAttribute="trailing" secondItem="luW-Pi-K22" secondAttribute="trailing" id="FXb-rr-zqr"/>
+                            <constraint firstItem="lFd-KZ-fyz" firstAttribute="leading" secondItem="DUG-6C-lK1" secondAttribute="trailing" constant="16" id="Fc1-GI-JRz"/>
+                            <constraint firstItem="DUG-6C-lK1" firstAttribute="leading" secondItem="qVL-tU-bFB" secondAttribute="leading" constant="64" id="HM0-cI-5VC"/>
+                            <constraint firstItem="lFd-KZ-fyz" firstAttribute="top" secondItem="qVL-tU-bFB" secondAttribute="top" constant="16" id="LNQ-Ec-An3"/>
+                            <constraint firstItem="DUG-6C-lK1" firstAttribute="centerY" secondItem="lFd-KZ-fyz" secondAttribute="centerY" id="eR8-wK-mpF"/>
+                            <constraint firstItem="qVL-tU-bFB" firstAttribute="trailing" secondItem="lFd-KZ-fyz" secondAttribute="trailing" constant="16" id="rHE-CC-7ol"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="SceneContainerView" destination="luW-Pi-K22" id="1bs-PG-M0r"/>
+                        <outlet property="titleLabel" destination="DUG-6C-lK1" id="ovu-Fx-fSk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Sh1-Ux-Nge" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1814" y="638"/>
+        </scene>
     </scenes>
     <resources>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
@@ -1530,6 +1586,7 @@
         <image name="hammer" catalog="system" width="128" height="117"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="person" catalog="system" width="128" height="121"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="linkColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
