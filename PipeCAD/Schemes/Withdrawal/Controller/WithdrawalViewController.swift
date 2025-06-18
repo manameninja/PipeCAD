@@ -59,7 +59,7 @@ class WithdrawalViewController: UIViewController {
         
         let configurations = createFlangeConfigurations(
             version: WithdrawalModel.versionArray,
-            title: WithdrawalModel.titlesArray,
+            title: WithdrawalModel.titlesArrayArray,
             dn: WithdrawalModel.dnArray,
             d: WithdrawalModel.dArray,
             t: WithdrawalModel.tArray,
@@ -167,8 +167,14 @@ class WithdrawalViewController: UIViewController {
             }
         }
 
-        setupDropDownButton(buttonDropDown: dropDownTitle, button: titleButton, data: WithdrawalModel.titlesArray) { selected in
-            self.selectedTitle = selected
+        if versionButton.titleLabel?.text == "(Международные типоразмеры ISO 3419)" {
+            setupDropDownButton(buttonDropDown: dropDownTitle, button: titleButton, data: WithdrawalModel.titlesArrayArray[0]) { selected in
+                self.selectedTitle = selected
+            }
+        } else {
+            setupDropDownButton(buttonDropDown: dropDownTitle, button: titleButton, data: WithdrawalModel.titlesArrayArray[1]) { selected in
+                self.selectedTitle = selected
+            }
         }
         
         setupDropDownButton(buttonDropDown: dropDownVersion, button: versionButton, data: WithdrawalModel.versionArray) { selected in
@@ -178,7 +184,7 @@ class WithdrawalViewController: UIViewController {
 
     func createFlangeConfigurations(
         version: [String],
-        title: [String],
+        title: [[String]],
         dn: [String],
         d: [String],
         t: [String],
@@ -219,12 +225,12 @@ class WithdrawalViewController: UIViewController {
 //        print(TransitionModel.dnArray2.count, TransitionModel.dArray2.count, TransitionModel.tArray2.count, TransitionModel.d1Array2.count, TransitionModel.t1Array2.count, TransitionModel.lArray2.count, TransitionModel.rArray2.count, TransitionModel.r1Array2.count)
         
         let countArray = [count, count2]
-        for type in 0..<WithdrawalModel.titlesArray.count {
-            for ver in 0..<WithdrawalModel.versionArray.count {
+        for ver in 0..<WithdrawalModel.versionArray.count {
+            for type in 0..<WithdrawalModel.titlesArrayArray[ver].count {
                 for i in 0..<countArray[ver] {
                     let config = WithdrawalConfiguration(
                         version: version[ver],
-                        title: title[type],
+                        title: title[ver][type],
                         dn: flangesArray[ver][0][i],
                         d: flangesArray[ver][1][i],
                         t: flangesArray[ver][2][i],
@@ -356,7 +362,7 @@ extension WithdrawalViewController {
             label.centerYAnchor.constraint(equalTo: imageContainerView.centerYAnchor, constant: relativeOffsetY)
         ])
         
-        gostLabel.text = "ГОСТ 17378-2001 "
+        gostLabel.text = "ГОСТ 17375-71 "
         gostLabel.font = .customFont(name: "GOST type A Italic", size: fontSize)
         gostLabel.sizeToFit()
         imageContainerView.addSubview(gostLabel)
@@ -441,10 +447,10 @@ extension WithdrawalViewController {
 
         if let config = configurationDict[key] {
             imageView.image = UIImage(named: config.imageName)
-            if config.title == "Отвод 45 градусов" {
-                schemeNameLabel.text = "Переход К - \(config.dn) x \(config.d) x \(config.t)"
+            if config.version == "(Международные типоразмеры ISO 3419)" {
+                schemeNameLabel.text = "\(config.title) - 1 - \(config.dn) x \(config.t) ГОСТ 17375-71"
             } else {
-                schemeNameLabel.text = "Переход Э - \(config.dn) x \(config.d) x \(config.t)"
+                schemeNameLabel.text = "\(config.title) - 2 - \(config.dn) x \(config.t) ГОСТ 17375-71"
             }
             switch config.title {
             case "Отвод 45 градусов":

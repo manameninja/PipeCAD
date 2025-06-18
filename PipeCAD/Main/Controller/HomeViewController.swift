@@ -16,7 +16,7 @@ class HomeViewController: UIViewController {
     private let items: [(icon: String, title: String)] = [
         (icon: "circle.dotted.circle", title: "Переходы"),
         (icon: "rainbow", title: "Тройники"),
-        (icon: "circlebadge", title: "Прокладки"),
+        (icon: "circlebadge", title: "Отводы"),
         (icon: "pipe.and.drop", title: "Клапаны"),
         (icon: "circle.grid.2x1.right.filled", title: "Линейные заготовки"),
         (icon: "circle", title: "Трубы"),

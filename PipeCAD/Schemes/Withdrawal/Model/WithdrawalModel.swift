@@ -11,8 +11,12 @@ struct WithdrawalModel {
     
     static let versionArray = ["(Международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
     static let titlesArray = ["Отвод 45 градусов", "Отвод 60 градусов", "Отвод 90 градусов", "Отвод 180 градусов"]
+    
+    static let titlesArray1 = ["Отвод 45 градусов", "Отвод 90 градусов", "Отвод 180 градусов"]
+    static let titlesArray2 = ["Отвод 45 градусов", "Отвод 60 градусов", "Отвод 90 градусов", "Отвод 180 градусов"]
+    static let titlesArrayArray = [titlesArray1, titlesArray2]
     static let dopsArray = ["(Международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
-    static let titlesImage = ["conc", "ecen", "eq", "eq"]
+    static let titlesImage = ["wd90", "wd90", "eq", "eq"]
     
     static let label1XArray: [CGFloat] = [-160, -160, -160, -160]
     static let label2XArray: [CGFloat] = [-140, -140, -140, -140]
