@@ -25,29 +25,38 @@ class SceneViewController: UIViewController {
         let sceneView = SCNView(frame: SceneContainerView.bounds)
         sceneView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         sceneView.allowsCameraControl = true
-        sceneView.backgroundColor = .white
+        sceneView.backgroundColor = .systemGray6
         SceneContainerView.addSubview(sceneView)
         SceneContainerView.bringSubviewToFront(titleLabel)
         
         guard let scene = SCNScene(named: modelName) else { return }
-        print(modelName)
+        
+        scene.rootNode.enumerateChildNodes { (node, _) in
+
+            guard let geometry = node.geometry else { return }
+
+            for material in geometry.materials {
+                material.diffuse.contents = UIColor.lightGray
+            }
+        }
+        
         sceneView.scene = scene
         
         let cameraNode = SCNNode()
         cameraNode.camera = SCNCamera()
         scene.rootNode.addChildNode(cameraNode)
         
-//        if let modelNode = scene.rootNode.childNodes.first {
-//            let (minVec, maxVec) = modelNode.boundingBox
-//            let maxDim = Swift.max(
-//                maxVec.x - minVec.x,
-//                maxVec.y - minVec.y,
-//                maxVec.z - minVec.z
-//            )
-//            
-//            cameraNode.position = SCNVector3(0, 0, maxDim * 2)
-//            modelNode.position = SCNVector3(-0, -0, -150)
-//        }
+        if let modelNode = scene.rootNode.childNodes.first {
+            let (minVec, maxVec) = modelNode.boundingBox
+            let maxDim = Swift.max(
+                maxVec.x - minVec.x,
+                maxVec.y - minVec.y,
+                maxVec.z - minVec.z
+            )
+            
+            cameraNode.position = SCNVector3(0, 0, maxDim * 2)
+            modelNode.position = SCNVector3(-0, -0, -200)
+        }
         
         sceneView.autoenablesDefaultLighting = true
         

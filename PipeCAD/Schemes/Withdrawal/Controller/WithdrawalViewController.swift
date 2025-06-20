@@ -421,18 +421,48 @@ extension WithdrawalViewController {
     func setupNavigationBar() {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.title = screenTitle ?? "PipeInfo"
-        let config = UIImage.SymbolConfiguration(weight: .semibold)
-        let image = UIImage(systemName: "square.and.arrow.down", withConfiguration: config)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(
-            image: image,
+        
+        let dowanloadConfig = UIImage.SymbolConfiguration(weight: .semibold)
+        let sceneConfig = UIImage.SymbolConfiguration(weight: .medium)
+        
+        let downloadImage = UIImage(systemName: "arrow.down.square", withConfiguration: dowanloadConfig)
+        let downloadButton = UIBarButtonItem(
+            image: downloadImage,
             style: .plain,
             target: self,
             action: #selector(doneButtonTapped)
         )
+        
+        let sceneImage = UIImage(systemName: "view.3d", withConfiguration: sceneConfig)
+        let sceneButton = UIBarButtonItem(
+            image: sceneImage,
+            style: .plain,
+            target: self,
+            action: #selector(sceneButtonTapped)
+        )
+
+        navigationItem.rightBarButtonItems = [downloadButton, sceneButton]
     }
+    
     @objc private func doneButtonTapped() {
         let renderImage = containerView.asImage()
         saveImageToPhotosAlbum(renderImage, in: self)
+    }
+    
+    @objc private func sceneButtonTapped() {
+        let sBoard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = sBoard.instantiateViewController(withIdentifier: "SceneVC") as! SceneViewController
+        vc.titleString = "3D - \(selectedTitle ?? "")"
+        
+        switch titleButton.titleLabel?.text {
+        case "Отвод 45 градусов": vc.modelName = "wd45model.usdz"
+        case "Отвод 60 градусов": vc.modelName = "wd60model.usdz"
+        case "Отвод 90 градусов": vc.modelName = "wd90model.usdz"
+        case "Отвод 180 градусов": vc.modelName = "wd180model.usdz"
+        default: vc.modelName = "wd45model.usdz"
+        }
+        
+        self.present(vc, animated: true)
     }
     
     func findConfiguration() {

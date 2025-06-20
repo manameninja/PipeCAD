@@ -461,11 +461,10 @@ extension TransitionViewController {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.title = screenTitle ?? "PipeInfo"
         
-        let config = UIImage.SymbolConfiguration(weight: .semibold)
-        let secondConfig = UIImage.SymbolConfiguration(weight: .medium)
+        let dowanloadConfig = UIImage.SymbolConfiguration(weight: .semibold)
+        let sceneConfig = UIImage.SymbolConfiguration(weight: .medium)
         
-        // Первая кнопка — "Скачать"
-        let downloadImage = UIImage(systemName: "arrow.down.square", withConfiguration: config)
+        let downloadImage = UIImage(systemName: "arrow.down.square", withConfiguration: dowanloadConfig)
         let downloadButton = UIBarButtonItem(
             image: downloadImage,
             style: .plain,
@@ -473,20 +472,15 @@ extension TransitionViewController {
             action: #selector(doneButtonTapped)
         )
         
-        // Вторая кнопка — например, "Поделиться"
-        let shareImage = UIImage(systemName: "view.3d", withConfiguration: secondConfig)
-        let shareButton = UIBarButtonItem(
-            image: shareImage,
+        let sceneImage = UIImage(systemName: "view.3d", withConfiguration: sceneConfig)
+        let sceneButton = UIBarButtonItem(
+            image: sceneImage,
             style: .plain,
             target: self,
             action: #selector(sceneButtonTapped)
         )
-        
-        // Отрицательный spacer уменьшает расстояние между кнопками
-        let negativeSpacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        negativeSpacer.width = -32  // можно поэкспериментировать с -6, -10 и т.п.
 
-        navigationItem.rightBarButtonItems = [downloadButton, negativeSpacer, shareButton]
+        navigationItem.rightBarButtonItems = [downloadButton, sceneButton]
     }
 
     
@@ -500,9 +494,9 @@ extension TransitionViewController {
         let vc = sBoard.instantiateViewController(withIdentifier: "SceneVC") as! SceneViewController
         vc.titleString = "3D - \(selectedTitle ?? "")"
         if titleButton.titleLabel?.text == "Переход концентрический" {
-            vc.modelName = "ball.usdz"
+            vc.modelName = "concModel.usdz"
         } else {
-            vc.modelName = "tv_retro.usdz"
+            vc.modelName = "concModel.usdz"
         }
         self.present(vc, animated: true)
     }
