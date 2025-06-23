@@ -496,7 +496,7 @@ extension TransitionViewController {
         if titleButton.titleLabel?.text == "Переход концентрический" {
             vc.modelName = "concModel.usdz"
         } else {
-            vc.modelName = "concModel.usdz"
+            vc.modelName = "ecenModel.usdz"
         }
         self.present(vc, animated: true)
     }
