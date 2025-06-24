@@ -108,7 +108,7 @@ class TransitionViewController: UIViewController {
     
     func updateDropDowns() {
         switch versionButton.titleLabel?.text ?? "" {
-        case "(Международные типоразмеры ISO 3419)":
+        case "Исполнение 1 (ISO 3419)":
             let sortedUniqueDNArray = Array(
                 Set(TransitionModel.dnArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
             )
@@ -318,7 +318,7 @@ extension TransitionViewController {
                     let imageView = UIImageView(image: image)
                     imageView.tintColor = .systemGray
                     imageView.frame = CGRect(x: 10, y: 10, width: cell.frame.height - 20, height: cell.frame.height - 20)
-                    if self.versionButton.titleLabel?.text == "(Международные типоразмеры ISO 3419)" {
+                    if self.versionButton.titleLabel?.text == "Исполнение 1 (ISO 3419)" {
                         cell.dopLabel.text = TransitionModel.dopsArray[0]
                     } else {
                         cell.dopLabel.text = TransitionModel.dopsArray[1]
@@ -569,7 +569,7 @@ extension TransitionViewController {
     
     private func firstUpdateDropDown() {
         switch versionButton.titleLabel?.text ?? "" {
-        case "(Международные типоразмеры ISO 3419)":
+        case "Исполнение 1 (ISO 3419)":
             let sortedUniqueDNArray = Array(
                 Set(TransitionModel.dnArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
             )

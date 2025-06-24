@@ -105,7 +105,7 @@ class WithdrawalViewController: UIViewController {
     
     func updateDropDowns() {
         switch versionButton.titleLabel?.text ?? "" {
-        case "(Международные типоразмеры ISO 3419)":
+        case "Исполнение 1 (ISO 3419)":
             let sortedUniqueDNArray = Array(
                 Set(WithdrawalModel.dnArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
             )
@@ -167,7 +167,7 @@ class WithdrawalViewController: UIViewController {
             }
         }
 
-        if versionButton.titleLabel?.text == "(Международные типоразмеры ISO 3419)" {
+        if versionButton.titleLabel?.text == "Исполнение 1 (ISO 3419)" {
             setupDropDownButton(buttonDropDown: dropDownTitle, button: titleButton, data: WithdrawalModel.titlesArrayArray[0]) { selected in
                 self.selectedTitle = selected
             }
@@ -291,7 +291,7 @@ extension WithdrawalViewController {
                     let imageView = UIImageView(image: image)
                     imageView.tintColor = .systemGray
                     imageView.frame = CGRect(x: 10, y: 10, width: cell.frame.height - 20, height: cell.frame.height - 20)
-                    if self.versionButton.titleLabel?.text == "(Международные типоразмеры ISO 3419)" {
+                    if self.versionButton.titleLabel?.text == "Исполнение 1 (ISO 3419)" {
                         cell.dopLabel.text = WithdrawalModel.dopsArray[0]
                     } else {
                         cell.dopLabel.text = WithdrawalModel.dopsArray[1]
@@ -477,7 +477,7 @@ extension WithdrawalViewController {
 
         if let config = configurationDict[key] {
             imageView.image = UIImage(named: config.imageName)
-            if config.version == "(Международные типоразмеры ISO 3419)" {
+            if config.version == "Исполнение 1 (ISO 3419)" {
                 schemeNameLabel.text = "\(config.title) - 1 - \(config.dn) x \(config.t) ГОСТ 17375-71"
             } else {
                 schemeNameLabel.text = "\(config.title) - 2 - \(config.dn) x \(config.t) ГОСТ 17375-71"
@@ -486,13 +486,13 @@ extension WithdrawalViewController {
             case "Отвод 45 градусов":
                 massLabel.text = "Масса \(config.mass45) кг. "
             case "Отвод 60 градусов":
-                if config.version == "(Международные типоразмеры ISO 3419)" {
+                if config.version == "Исполнение 1 (ISO 3419)" {
                     massLabel.text = "Масса \(config.mass90) кг. "
                 } else {
                     massLabel.text = "Масса \(config.mass60) кг. "
                 }
             case "Отвод 90 градусов":
-                if config.version == "(Международные типоразмеры ISO 3419)" {
+                if config.version == "Исполнение 1 (ISO 3419)" {
                     massLabel.text = "Масса \(config.mass60) кг. "
                 } else {
                     massLabel.text = "Масса \(config.mass90) кг. "
@@ -539,7 +539,7 @@ extension WithdrawalViewController {
     
     private func firstUpdateDropDown() {
         switch versionButton.titleLabel?.text ?? "" {
-        case "(Международные типоразмеры ISO 3419)":
+        case "Исполнение 1 (ISO 3419)":
             let sortedUniqueDNArray = Array(
                 Set(WithdrawalModel.dnArray.compactMap { Double($0.replacingOccurrences(of: ",", with: ".")) })
             )

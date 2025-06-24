@@ -9,9 +9,9 @@ import Foundation
 
 struct TransitionModel {
     
-    static let versionArray = ["(Международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
+    static let versionArray = ["Исполнение 1 (ISO 3419)", "Исполнение 2 (РФ и СНГ)"]
     static let titlesArray = ["Переход концентрический", "Переход эксцентрический"]
-    static let dopsArray = ["(международные типоразмеры ISO 3419)", "(Россия и СНГ)"]
+    static let dopsArray = ["(ISO 3419)", "(РФ и СНГ)"]
     static let titlesImage = ["conc", "ecen"]
     
     static let label1XArray: [CGFloat] = [-95, -95]
