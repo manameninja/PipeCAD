@@ -367,7 +367,14 @@ extension TransitionViewController {
         
         label.text = text
         
-        let fontSize = screenWidth * 0.035
+        var fontSize = screenWidth * 0.035
+        if label == label2 {
+            fontSize = screenWidth * 0.030
+        } else if label == label5 {
+            fontSize = screenWidth * 0.025
+        } else {
+            var fontSize = screenWidth * 0.035
+        }
         label.font = .customFont(name: "GOST type A Italic", size: fontSize)
         
         label.textColor = .black

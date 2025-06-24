@@ -15,18 +15,18 @@ struct TransitionModel {
     static let titlesImage = ["conc", "ecen"]
     
     static let label1XArray: [CGFloat] = [-95, -95]
-    static let label2XArray: [CGFloat] = [-75, -75]
-    static let label3XArray: [CGFloat] = [-30, 0]
+    static let label2XArray: [CGFloat] = [-76, -75]
+    static let label3XArray: [CGFloat] = [-25, 0]
     static let label4XArray: [CGFloat] = [65, 70]
-    static let label5XArray: [CGFloat] = [90, 85]
+    static let label5XArray: [CGFloat] = [90, 84]
     static let label6XArray: [CGFloat] = [105, 100]
     static let label7XArray: [CGFloat] = [15, 10]
     
     static let label1YArray: [CGFloat] = [10, -10]
-    static let label2YArray: [CGFloat] = [55, 40]
+    static let label2YArray: [CGFloat] = [55, 41]
     static let label3YArray: [CGFloat] = [-112, -122]
     static let label4YArray: [CGFloat] = [-108, -47]
-    static let label5YArray: [CGFloat] = [40, 47]
+    static let label5YArray: [CGFloat] = [41, 48]
     static let label6YArray: [CGFloat] = [0, 30]
     static let label7YArray: [CGFloat] = [102, 90]
     
