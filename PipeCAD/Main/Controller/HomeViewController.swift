@@ -17,11 +17,6 @@ class HomeViewController: UIViewController {
         (icon: "circle.dotted.circle", title: "Переходы"),
         (icon: "rainbow", title: "Тройники"),
         (icon: "circlebadge", title: "Отводы"),
-        (icon: "pipe.and.drop", title: "Клапаны"),
-        (icon: "circle.grid.2x1.right.filled", title: "Линейные заготовки"),
-        (icon: "circle", title: "Трубы"),
-        (icon: "chart.line.uptrend.xyaxis", title: "Улучшить"),
-        (icon: "gear", title: "Настройки"),
         (icon: "info.bubble", title: "Справка"),
     ]
     
@@ -86,7 +81,7 @@ extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
             self.navigationItem.backButtonTitle = ""
             vc.screenTitle = items[indexPath.row].title
             self.navigationController?.pushViewController(vc, animated: true)
-        case 8:
+        case 3:
             let sBoard = UIStoryboard(name: "Main", bundle: nil)
             let vc = sBoard.instantiateViewController(withIdentifier: "HelpVC") as! HelpViewController
             self.navigationItem.backButtonTitle = ""
