@@ -391,7 +391,7 @@ extension TeeViewController {
         if label == label2 {
             fontSize = screenWidth * 0.030
         } else {
-            var fontSize = screenWidth * 0.035
+            fontSize = screenWidth * 0.035
         }
         label.font = .customFont(name: "GOST type A Italic", size: fontSize)
         

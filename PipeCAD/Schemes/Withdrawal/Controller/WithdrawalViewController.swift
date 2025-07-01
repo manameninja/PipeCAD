@@ -39,6 +39,7 @@ class WithdrawalViewController: UIViewController {
     let label5 = UILabel()
     let label6 = UILabel()
     let label7 = UILabel()
+    let label8 = UILabel()
     let gostLabel = UILabel()
     
     let dropDownVersion = DropDown()
@@ -71,7 +72,7 @@ class WithdrawalViewController: UIViewController {
             mass60: WithdrawalModel.massArray60_2,
             mass90: WithdrawalModel.massArray90,
             mass180: WithdrawalModel.massArray180,
-            imageName: WithdrawalModel.titlesImage,
+            imageName: WithdrawalModel.titlesImageArray,
             label1X: WithdrawalModel.label1XArray,
             label2X: WithdrawalModel.label2XArray,
             label3X: WithdrawalModel.label3XArray,
@@ -79,6 +80,7 @@ class WithdrawalViewController: UIViewController {
             label5X: WithdrawalModel.label5XArray,
             label6X: WithdrawalModel.label6XArray,
             label7X: WithdrawalModel.label7XArray,
+            label8X: WithdrawalModel.label8XArray,
             label1Y: WithdrawalModel.label1YArray,
             label2Y: WithdrawalModel.label2YArray,
             label3Y: WithdrawalModel.label3YArray,
@@ -86,6 +88,7 @@ class WithdrawalViewController: UIViewController {
             label5Y: WithdrawalModel.label5YArray,
             label6Y: WithdrawalModel.label6YArray,
             label7Y: WithdrawalModel.label7YArray,
+            label8Y: WithdrawalModel.label8YArray,
             flangesArray: WithdrawalModel.flangesArray)
         self.configurations = configurations
         
@@ -196,7 +199,7 @@ class WithdrawalViewController: UIViewController {
         mass60: [String],
         mass90: [String],
         mass180: [String],
-        imageName: [String],
+        imageName: [[String]],
         label1X: [CGFloat],
         label2X: [CGFloat],
         label3X: [CGFloat],
@@ -204,6 +207,7 @@ class WithdrawalViewController: UIViewController {
         label5X: [CGFloat],
         label6X: [CGFloat],
         label7X: [CGFloat],
+        label8X: [CGFloat],
     
         label1Y: [CGFloat],
         label2Y: [CGFloat],
@@ -212,6 +216,7 @@ class WithdrawalViewController: UIViewController {
         label5Y: [CGFloat],
         label6Y: [CGFloat],
         label7Y: [CGFloat],
+        label8Y: [CGFloat],
         flangesArray: [[[String]]]
     ) -> [WithdrawalConfiguration] {
         var configurations: [WithdrawalConfiguration] = []
@@ -243,14 +248,15 @@ class WithdrawalViewController: UIViewController {
                         mass60: flangesArray[ver][9][i],
                         mass90: flangesArray[ver][10][i],
                         mass180: flangesArray[ver][11][i],
-                        imageName: imageName[type],
+                        imageName: imageName[ver][type],
                         label1Text: "D: \(flangesArray[ver][1][i])",
                         label2Text: "T: \(flangesArray[ver][2][i])",
-                        label3Text: "R1: \(flangesArray[ver][3][i])",
-                        label4Text: "R2: \(flangesArray[ver][4][i])",
-                        label5Text: "T1: \(flangesArray[ver][6][i])",
-                        label6Text: "D1: \(flangesArray[ver][5][i])",
+                        label3Text: "R: \(flangesArray[ver][3][i])",
+                        label4Text: "W: \(flangesArray[ver][4][i])",
+                        label5Text: "T: \(flangesArray[ver][2][i])",
+                        label6Text: "H: \(flangesArray[ver][5][i])",
                         label7Text: "L: \(flangesArray[ver][7][i])",
+                        label8Text: "F: \(flangesArray[ver][3][i])",
                         label1X: label1X[type],
                         label2X: label2X[type],
                         label3X: label3X[type],
@@ -258,13 +264,15 @@ class WithdrawalViewController: UIViewController {
                         label5X: label5X[type],
                         label6X: label6X[type],
                         label7X: label7X[type],
+                        label8X: label8X[type],
                         label1Y: label1Y[type],
                         label2Y: label2Y[type],
                         label3Y: label3Y[type],
                         label4Y: label4Y[type],
                         label5Y: label5Y[type],
                         label6Y: label6Y[type],
-                        label7Y: label7Y[type]
+                        label7Y: label7Y[type],
+                        label8Y: label8Y[type]
                     )
                     configurations.append(config)
                     print(config)
@@ -287,7 +295,7 @@ extension WithdrawalViewController {
             buttonDropDown.customCellConfiguration = { index, item, cell in
                 
                 cell.subviews.filter({ $0 is UIImageView }).forEach { $0.removeFromSuperview() }
-                if let image = UIImage(named: WithdrawalModel.titlesImage[index]) {
+                if let image = UIImage(named: WithdrawalModel.titlesImage2[index]) {
                     let imageView = UIImageView(image: image)
                     imageView.tintColor = .systemGray
                     imageView.frame = CGRect(x: 10, y: 10, width: cell.frame.height - 20, height: cell.frame.height - 20)
@@ -340,7 +348,23 @@ extension WithdrawalViewController {
         
         label.text = text
         
-        let fontSize = screenWidth * 0.045
+        if label == label6 {
+            label.transform = CGAffineTransform(rotationAngle: -.pi / 3.7)
+        }
+        
+        if label == label5 && selectedTitle == "Отвод 45 градусов" {
+            label.transform = CGAffineTransform(rotationAngle: .pi / 18)
+        } else if label == label5 {
+            label.transform = CGAffineTransform(rotationAngle: .pi * 2 / 1)
+        }
+        
+        var fontSize = screenWidth * 0.035
+        
+        if label == label5 && selectedTitle == "Отвод 90 градусов" {
+            fontSize = screenWidth * 0.030
+        } else {
+            fontSize = screenWidth * 0.035
+        }
         label.font = .customFont(name: "GOST type A Italic", size: fontSize)
         
         label.textColor = .black
@@ -509,6 +533,7 @@ extension WithdrawalViewController {
             setupCoordinates(label: label5, x: config.label5X, y: config.label5Y, text: config.label5Text + " ")
             setupCoordinates(label: label6, x: config.label6X, y: config.label6Y, text: config.label6Text + " ")
             setupCoordinates(label: label7, x: config.label7X, y: config.label7Y, text: config.label7Text + " ")
+            setupCoordinates(label: label8, x: config.label8X, y: config.label8Y, text: config.label8Text + " ")
         } else {
             imageView.image = nil
             schemeNameLabel.text = "Конфигурация не найдена"
@@ -522,6 +547,7 @@ extension WithdrawalViewController {
             label5.text = ""
             label6.text = ""
             label7.text = ""
+            label8.text = ""
         }
     }
 }
