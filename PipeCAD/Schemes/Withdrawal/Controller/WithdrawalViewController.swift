@@ -40,6 +40,7 @@ class WithdrawalViewController: UIViewController {
     let label6 = UILabel()
     let label7 = UILabel()
     let label8 = UILabel()
+    let label9 = UILabel()
     let gostLabel = UILabel()
     
     let dropDownVersion = DropDown()
@@ -73,22 +74,24 @@ class WithdrawalViewController: UIViewController {
             mass90: WithdrawalModel.massArray90,
             mass180: WithdrawalModel.massArray180,
             imageName: WithdrawalModel.titlesImageArray,
-            label1X: WithdrawalModel.label1XArray,
-            label2X: WithdrawalModel.label2XArray,
-            label3X: WithdrawalModel.label3XArray,
-            label4X: WithdrawalModel.label4XArray,
-            label5X: WithdrawalModel.label5XArray,
-            label6X: WithdrawalModel.label6XArray,
-            label7X: WithdrawalModel.label7XArray,
-            label8X: WithdrawalModel.label8XArray,
-            label1Y: WithdrawalModel.label1YArray,
-            label2Y: WithdrawalModel.label2YArray,
-            label3Y: WithdrawalModel.label3YArray,
-            label4Y: WithdrawalModel.label4YArray,
-            label5Y: WithdrawalModel.label5YArray,
-            label6Y: WithdrawalModel.label6YArray,
-            label7Y: WithdrawalModel.label7YArray,
-            label8Y: WithdrawalModel.label8YArray,
+            label1X: WithdrawalModel.label1xArrayArray,
+            label2X: WithdrawalModel.label2xArrayArray,
+            label3X: WithdrawalModel.label3xArrayArray,
+            label4X: WithdrawalModel.label4xArrayArray,
+            label5X: WithdrawalModel.label5xArrayArray,
+            label6X: WithdrawalModel.label6xArrayArray,
+            label7X: WithdrawalModel.label7xArrayArray,
+            label8X: WithdrawalModel.label8xArrayArray,
+            label9X: WithdrawalModel.label9xArrayArray,
+            label1Y: WithdrawalModel.label1yArrayArray,
+            label2Y: WithdrawalModel.label2yArrayArray,
+            label3Y: WithdrawalModel.label3yArrayArray,
+            label4Y: WithdrawalModel.label4yArrayArray,
+            label5Y: WithdrawalModel.label5yArrayArray,
+            label6Y: WithdrawalModel.label6yArrayArray,
+            label7Y: WithdrawalModel.label7yArrayArray,
+            label8Y: WithdrawalModel.label8yArrayArray,
+            label9Y: WithdrawalModel.label9yArrayArray,
             flangesArray: WithdrawalModel.flangesArray)
         self.configurations = configurations
         
@@ -200,23 +203,25 @@ class WithdrawalViewController: UIViewController {
         mass90: [String],
         mass180: [String],
         imageName: [[String]],
-        label1X: [CGFloat],
-        label2X: [CGFloat],
-        label3X: [CGFloat],
-        label4X: [CGFloat],
-        label5X: [CGFloat],
-        label6X: [CGFloat],
-        label7X: [CGFloat],
-        label8X: [CGFloat],
+        label1X: [[CGFloat]],
+        label2X: [[CGFloat]],
+        label3X: [[CGFloat]],
+        label4X: [[CGFloat]],
+        label5X: [[CGFloat]],
+        label6X: [[CGFloat]],
+        label7X: [[CGFloat]],
+        label8X: [[CGFloat]],
+        label9X: [[CGFloat]],
     
-        label1Y: [CGFloat],
-        label2Y: [CGFloat],
-        label3Y: [CGFloat],
-        label4Y: [CGFloat],
-        label5Y: [CGFloat],
-        label6Y: [CGFloat],
-        label7Y: [CGFloat],
-        label8Y: [CGFloat],
+        label1Y: [[CGFloat]],
+        label2Y: [[CGFloat]],
+        label3Y: [[CGFloat]],
+        label4Y: [[CGFloat]],
+        label5Y: [[CGFloat]],
+        label6Y: [[CGFloat]],
+        label7Y: [[CGFloat]],
+        label8Y: [[CGFloat]],
+        label9Y: [[CGFloat]],
         flangesArray: [[[String]]]
     ) -> [WithdrawalConfiguration] {
         var configurations: [WithdrawalConfiguration] = []
@@ -255,24 +260,27 @@ class WithdrawalViewController: UIViewController {
                         label4Text: "W: \(flangesArray[ver][4][i])",
                         label5Text: "T: \(flangesArray[ver][2][i])",
                         label6Text: "H: \(flangesArray[ver][5][i])",
-                        label7Text: "L: \(flangesArray[ver][7][i])",
+                        label7Text: "B: \(flangesArray[ver][7][i])",
                         label8Text: "F: \(flangesArray[ver][3][i])",
-                        label1X: label1X[type],
-                        label2X: label2X[type],
-                        label3X: label3X[type],
-                        label4X: label4X[type],
-                        label5X: label5X[type],
-                        label6X: label6X[type],
-                        label7X: label7X[type],
-                        label8X: label8X[type],
-                        label1Y: label1Y[type],
-                        label2Y: label2Y[type],
-                        label3Y: label3Y[type],
-                        label4Y: label4Y[type],
-                        label5Y: label5Y[type],
-                        label6Y: label6Y[type],
-                        label7Y: label7Y[type],
-                        label8Y: label8Y[type]
+                        label9Text: "C: \(flangesArray[ver][6][i])",
+                        label1X: label1X[ver][type],
+                        label2X: label2X[ver][type],
+                        label3X: label3X[ver][type],
+                        label4X: label4X[ver][type],
+                        label5X: label5X[ver][type],
+                        label6X: label6X[ver][type],
+                        label7X: label7X[ver][type],
+                        label8X: label8X[ver][type],
+                        label9X: label9X[ver][type],
+                        label1Y: label1Y[ver][type],
+                        label2Y: label2Y[ver][type],
+                        label3Y: label3Y[ver][type],
+                        label4Y: label4Y[ver][type],
+                        label5Y: label5Y[ver][type],
+                        label6Y: label6Y[ver][type],
+                        label7Y: label7Y[ver][type],
+                        label8Y: label8Y[ver][type],
+                        label9Y: label9Y[ver][type]
                     )
                     configurations.append(config)
                     print(config)
@@ -358,13 +366,22 @@ extension WithdrawalViewController {
             label.transform = CGAffineTransform(rotationAngle: .pi * 2 / 1)
         }
         
+        if label == label3 && selectedTitle == "Отвод 180 градусов" {
+            label.transform = CGAffineTransform(rotationAngle: -.pi / 4)
+        } else if label == label3 {
+            label.transform = CGAffineTransform(rotationAngle: .pi * 2 / 1)
+        }
+        
         var fontSize = screenWidth * 0.035
         
         if label == label5 && selectedTitle == "Отвод 90 градусов" {
             fontSize = screenWidth * 0.030
+        } else if label == label1 && selectedTitle == "Отвод 180 градусов" {
+            fontSize = screenWidth * 0.040
         } else {
             fontSize = screenWidth * 0.035
         }
+        
         label.font = .customFont(name: "GOST type A Italic", size: fontSize)
         
         label.textColor = .black
@@ -534,6 +551,7 @@ extension WithdrawalViewController {
             setupCoordinates(label: label6, x: config.label6X, y: config.label6Y, text: config.label6Text + " ")
             setupCoordinates(label: label7, x: config.label7X, y: config.label7Y, text: config.label7Text + " ")
             setupCoordinates(label: label8, x: config.label8X, y: config.label8Y, text: config.label8Text + " ")
+            setupCoordinates(label: label9, x: config.label9X, y: config.label9Y, text: config.label9Text + " ")
         } else {
             imageView.image = nil
             schemeNameLabel.text = "Конфигурация не найдена"
@@ -548,6 +566,7 @@ extension WithdrawalViewController {
             label6.text = ""
             label7.text = ""
             label8.text = ""
+            label9.text = ""
         }
     }
 }

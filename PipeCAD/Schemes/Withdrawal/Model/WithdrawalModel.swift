@@ -22,24 +22,65 @@ struct WithdrawalModel {
     static let titlesImage2 = ["wd45", "wd60", "wd90", "wd180"]
     static let titlesImageArray = [titlesImage1, titlesImage2]
     
-    static let label1XArray: [CGFloat] = [-21, -48, -160, -160]
-    static let label2XArray: [CGFloat] = [-48, -63.5, -140, -140]
-    static let label3XArray: [CGFloat] = [100, 125,-65, -65]
-    static let label4XArray: [CGFloat] = [-1000, -1000, 105, 100]
-    static let label5XArray: [CGFloat] = [50, 69, 155, 155]
-    static let label6XArray: [CGFloat] = [-61, -1000, 170, 165]
-    static let label7XArray: [CGFloat] = [-1000, -1000, 0, 0]
-    static let label8XArray: [CGFloat] = [-1000, 15, 0, 0]
+    static let label1XArray1: [CGFloat] = [-21, -48, -97]
+    static let label2XArray1: [CGFloat] = [-48, -63.5, -152]
+    static let label3XArray1: [CGFloat] = [100, 125, 33]
+    static let label4XArray1: [CGFloat] = [-1000, -1000, -1000]
+    static let label5XArray1: [CGFloat] = [50, 69, -55]
+    static let label6XArray1: [CGFloat] = [-61, -1000, 170]
+    static let label7XArray1: [CGFloat] = [-1000, -1000, -147]
+    static let label8XArray1: [CGFloat] = [-1000, 15, -1000]
+    static let label9XArray1: [CGFloat] = [-1000, -1000, 0]
     
-    static let label1YArray: [CGFloat] = [90, 110, -15, -2]
-    static let label2YArray: [CGFloat] = [73, 92, -124, -115]
-    static let label3YArray: [CGFloat] = [-30, -70, -118, -110]
-    static let label4YArray: [CGFloat] = [-1000, -1000, -100, -66]
-    static let label5YArray: [CGFloat] = [38, 25, -100, -63]
-    static let label6YArray: [CGFloat] = [-85, 22, -1000, 22]
-    static let label7YArray: [CGFloat] = [-1000, -1000, 70, 90]
-    static let label8YArray: [CGFloat] = [-1000, -120, 70, 90]
+    static let label1YArray1: [CGFloat] = [90, 110, 88]
+    static let label2YArray1: [CGFloat] = [73, 92, 58]
+    static let label3YArray1: [CGFloat] = [-30, -70, -7]
+    static let label4YArray1: [CGFloat] = [-1000, -1000, -1000]
+    static let label5YArray1: [CGFloat] = [38, 25, -72]
+    static let label6YArray1: [CGFloat] = [-85, 22, -1000]
+    static let label7YArray1: [CGFloat] = [-1000, -1000, -45]
+    static let label8YArray1: [CGFloat] = [-1000, -120, -1000]
+    static let label9YArray1: [CGFloat] = [-1000, -1000, 58]
     
+    static let label1XArray2: [CGFloat] = [-21, -160, -48, -97]
+    static let label2XArray2: [CGFloat] = [-48, -140, -63.5, -152]
+    static let label3XArray2: [CGFloat] = [100, -65, 125, 33]
+    static let label4XArray2: [CGFloat] = [-1000, 105, -1000, -1000]
+    static let label5XArray2: [CGFloat] = [50, 155, 69, -55]
+    static let label6XArray2: [CGFloat] = [-61, 170, -1000, 170]
+    static let label7XArray2: [CGFloat] = [-1000, 0, -1000, -147]
+    static let label8XArray2: [CGFloat] = [-1000, 0, 15, -1000]
+    static let label9XArray2: [CGFloat] = [-1000, -1000, 50, 0]
+    
+    static let label1YArray2: [CGFloat] = [90, -15, 110, 88]
+    static let label2YArray2: [CGFloat] = [73, -124, 92, 58]
+    static let label3YArray2: [CGFloat] = [-30,-118, -70, -7]
+    static let label4YArray2: [CGFloat] = [-1000, -100, -1000, -1000]
+    static let label5YArray2: [CGFloat] = [38, -100, 25, -72]
+    static let label6YArray2: [CGFloat] = [-85, -1000, 22, -1000]
+    static let label7YArray2: [CGFloat] = [-1000, 70, -1000, -45]
+    static let label8YArray2: [CGFloat] = [-1000, 70, -120, -1000]
+    static let label9YArray2: [CGFloat] = [-1000, -1000, 50, 58]
+    
+    static let label1xArrayArray = [label1XArray1, label1XArray2]
+    static let label2xArrayArray = [label2XArray1, label2XArray2]
+    static let label3xArrayArray = [label3XArray1, label3XArray2]
+    static let label4xArrayArray = [label4XArray1, label4XArray2]
+    static let label5xArrayArray = [label5XArray1, label5XArray2]
+    static let label6xArrayArray = [label6XArray1, label6XArray2]
+    static let label7xArrayArray = [label7XArray1, label7XArray2]
+    static let label8xArrayArray = [label8XArray1, label8XArray2]
+    static let label9xArrayArray = [label9XArray1, label9XArray2]
+    
+    static let label1yArrayArray = [label1YArray1, label1YArray2]
+    static let label2yArrayArray = [label2YArray1, label2YArray2]
+    static let label3yArrayArray = [label3YArray1, label3YArray2]
+    static let label4yArrayArray = [label4YArray1, label4YArray2]
+    static let label5yArrayArray = [label5YArray1, label5YArray2]
+    static let label6yArrayArray = [label6YArray1, label6YArray2]
+    static let label7yArrayArray = [label7YArray1, label7YArray2]
+    static let label8yArrayArray = [label8YArray1, label8YArray2]
+    static let label9yArrayArray = [label9YArray1, label9YArray2]
     
     static let flangesArray = [[dnArray, dArray, tArray, rArray, wArray2, hArray, cArray, bArray, massArray45, massArray90, massArray60_2, massArray180], [dnArray2, dArray2, tArray2, rArray2, wArray2, hArray2, cArray2, bArray2, massArray45_2, massArray60_2, massArray90_2, massArray180_2]]
     
@@ -117,6 +158,7 @@ struct WithdrawalConfiguration {
     let label6Text: String
     let label7Text: String
     let label8Text: String
+    let label9Text: String
     
     let label1X: CGFloat
     let label2X: CGFloat
@@ -126,6 +168,7 @@ struct WithdrawalConfiguration {
     let label6X: CGFloat
     let label7X: CGFloat
     let label8X: CGFloat
+    let label9X: CGFloat
     
     let label1Y: CGFloat
     let label2Y: CGFloat
@@ -135,6 +178,7 @@ struct WithdrawalConfiguration {
     let label6Y: CGFloat
     let label7Y: CGFloat
     let label8Y: CGFloat
+    let label9Y: CGFloat
     
     var key: String {
         return "\(version)_\(title)_\(dn)_\(t)"
