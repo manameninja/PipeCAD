@@ -366,6 +366,12 @@ extension WithdrawalViewController {
             label.transform = CGAffineTransform(rotationAngle: .pi * 2 / 1)
         }
         
+        if label == label4 && selectedTitle == "Отвод 60 градусов" {
+            label.transform = CGAffineTransform(rotationAngle: -.pi / 5.5)
+        } else if label == label4 {
+            label.transform = CGAffineTransform(rotationAngle: .pi * 2 / 1)
+        }
+        
         if label == label3 && selectedTitle == "Отвод 180 градусов" {
             label.transform = CGAffineTransform(rotationAngle: -.pi / 4)
         } else if label == label3 {
